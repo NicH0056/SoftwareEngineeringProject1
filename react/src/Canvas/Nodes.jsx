@@ -53,6 +53,20 @@ const rectangle1 = ({data}) => {
         </div>
     )
 };
+
+const save1 = () => {
+    return(
+        <div className="save1" contentEditable="false" draggable="false"> SAVE </div>
+
+    )
+};
+const load1 = () => {
+    return(
+        <div className="load1" contentEditable="false" draggable="false"> LOAD </div>
+
+    )
+};
+
 const circle1 = ({data}) => {
     return(
         <div className="circle1" contentEditable="true">
@@ -75,7 +89,9 @@ const circle1 = ({data}) => {
 const nodeTypes ={
     diamond1: diamond1,
     rectangle1: rectangle1,
-    circle1: circle1
+    circle1: circle1,
+    save1: save1,
+    load1: load1
 };
 
 export default nodeTypes;

@@ -10,14 +10,12 @@ import './Shapes.css';
 import Sidebar from './Sidebar';
 import './dnd.css';
 import nodeTypes from './Nodes.jsx';
+import axios from 'axios';
 
 const initialElements = [
-  // {
-  //   id: '1',
-  //   type: 'diamond',
-  //   data: { label: 'test' },
-  //   position: { x: 250, y: 5 },
-  // },
+  
+  { id: 'saveButton', type: 'save1', data: { }, position: { x: 0, y: 0 } },
+  { id: 'loadButton', type: 'load1', data: { }, position: { x: 0, y: 35 } }
 ];
 
 let id = 0;
@@ -27,6 +25,13 @@ const DnDFlow = () => {
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [elements, setElements] = useState(initialElements);
+  const [data, setData] = React.useState(null);
+  //asynch function, gets data from /api constantly
+  React.useEffect(() => {
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
   const onConnect = (params) => setElements((els) => addEdge(params, els));
   const onElementsRemove = (elementsToRemove) =>
     setElements((els) => removeElements(elementsToRemove, els));
@@ -39,15 +44,34 @@ const DnDFlow = () => {
     //alert("dragging");
     event.dataTransfer.dropEffect = 'move';
   };
+  const dummy = (event) => {
+    event.preventDefault();
+    //alert("dragging");
+  };
 
   const onClick = (event, ids) => {
+    //save to express functionality, needs its own function at some point
     event.preventDefault();
-    alert(ids.id);
+    const reactData = {els: elements};
+    const url = "/create";
+  if(ids.type === "save1"){
+    axios.post(url, reactData)
+    .then(res => console.log('Data send'))
+    .catch(err => console.log(err.data))
+     //alert(data.id);
+  }
+  if(ids.type === "load1"){
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+    alert(data.nodes[0].type);
+    //data.forEach(element => element.forEach(node => alert(node.id)));
+    setElements((es) => data.nodes);
+  }
   };
 
   const onDrop = (event) => {
     event.preventDefault();
-
     const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
     const type = event.dataTransfer.getData('application/reactflow');
     const position = reactFlowInstance.project({

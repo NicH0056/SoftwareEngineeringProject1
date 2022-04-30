@@ -17,7 +17,7 @@ const Sidebar = () => {
     <aside>
         <section class="home">
         <div class="caracteristicas">
-            <div class="Etiquetas">Border Color</div>
+            {/* <div class="Etiquetas">Border Color</div>
             <div class="container1">
                 <div class="c1" onElementClick={(event) => onClick(event, 'circle1')} draggable></div>
                 <div class="c2"></div>
@@ -31,7 +31,7 @@ const Sidebar = () => {
                 <div class="c10"></div>
                 <div class="c11"></div>
                 <div class="c12"></div>
-            </div>
+            </div> */}
             <div class="Etiquetas">Shapes</div>
             <div class="Shapes">
                <div class="circle" onDragStart={(event) => onDragStart(event, 'circle1')} draggable></div> 
@@ -39,7 +39,7 @@ const Sidebar = () => {
                <div class="diamond" onDragStart={(event) => onDragStart(event, 'diamond1')} draggable></div> 
 
             </div>
-            <div class="Etiquetas">Fill Color</div>
+            {/* <div class="Etiquetas">Fill Color</div>
             <div class="container1">
                 <div class="c1"></div>
                 <div class="c2"></div>
@@ -53,7 +53,7 @@ const Sidebar = () => {
                 <div class="c10"></div>
                 <div class="c11"></div>
                 <div class="c12"></div>
-            </div>
+            </div> */}
                         
         </div>
     </section>  
