@@ -35,11 +35,9 @@ app.use(
 app.get("/api", (req, res) => {
   var userData = fs.readFileSync('src/Data.json', 'utf-8');
   var temp = JSON.parse(userData);
-  nodes = temp.id;
-  if(mapNum == -1){
-    mapNum = temp.mapNum;
-    currentUser = temp.currentUser;
-  }
+  nodes = temp.mapData.id;
+  mapNum = temp.mapNum;
+  currentUser = temp.user;
 	res.json({ 
 		nodes
 	 });
@@ -59,7 +57,10 @@ app.post('/create', function(req, res) {
 	const newNode = {
 	  id: req.body.els,
 	};
-  
+  var userData = fs.readFileSync('src/Data.json', 'utf-8');
+  var temp = JSON.parse(userData);
+  mapNum = temp.mapNum;
+  currentUser = temp.user;
 	nodes = (newNode);
 	console.log(JSON.stringify(newNode));
 	//console.log(nodes);
@@ -68,6 +69,9 @@ app.post('/create', function(req, res) {
   let mapData = fs.readFileSync('src/mapData.json', 'utf-8');
   let mData = JSON.parse(mapData);
   mData.forEach(function(Dat1) {
+    console.log("foreach");
+    console.log(currentUser);
+    console.log(mapNum);
     if(Dat1.user==currentUser && Dat1.mapNum==mapNum){
       console.log("OLD Dat1: " + Dat1.mapData);
       Dat1.mapData = nodes;

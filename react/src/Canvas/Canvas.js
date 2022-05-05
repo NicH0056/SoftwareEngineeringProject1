@@ -58,13 +58,13 @@ const DnDFlow = () => {
     axios.post(url, reactData)
     .then(res => console.log('Data send'))
     .catch(err => console.log(err.data))
-     //alert(data.id);
+    alert("Map Saved");
   }
   if(ids.type === "load1"){
     fetch("/api")
       .then((res) => res.json())
       .then((data) => setData(data));
-    alert(data.nodes[0].type);
+    alert("Map Loaded");
     //data.forEach(element => element.forEach(node => alert(node.id)));
     setElements((es) => data.nodes);
   }
